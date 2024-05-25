@@ -96,6 +96,7 @@ class ProjectItem {
 		this.updateProjectListsHandler = updateProjectListsFunction;
 		this.connectInfoButton();
 		this.connectSwitchButton(type);
+		this.connectDrag();
 	}
 
 	showMoreInfoHandler() {
@@ -115,6 +116,19 @@ class ProjectItem {
 		);
 		tooltip.attach();
 		this.hasActiveTooltip = true;
+	}
+
+	connectDrag() {
+		const item = document.getElementById(this.id);
+
+		item.addEventListener("dragstart", (event) => {
+			event.dataTransfer.setData("text/plain", this.id);
+			event.dataTransfer.effectAllowed = "move";
+		});
+
+		item.addEventListener("dragend", (event) => {
+			console.log(event);
+		});
 	}
 
 	connectInfoButton() {
@@ -148,6 +162,40 @@ class ProjectList {
 		for (const item of prjItems) {
 			this.projects.push(new ProjectItem(item.id, this.switchProject.bind(this), this.type));
 		}
+		this.connectDroppable();
+	}
+
+	connectDroppable() {
+		const list = document.querySelector(`#${this.type}-projects ul`);
+
+		list.addEventListener("dragenter", (event) => {
+			if (event.dataTransfer.types[0] === "text/plain") {
+				list.parentElement.classList.add("droppable");
+				event.preventDefault();
+			}
+		});
+
+		list.addEventListener("dragover", (event) => {
+			if (event.dataTransfer.types[0] === "text/plain") {
+				event.preventDefault();
+			}
+		});
+
+		list.addEventListener("dragleave", (event) => {
+			if (event.relatedTarget.closest(`#${this.type}-projects ul`) !== list) {
+				list.parentElement.classList.remove("droppable");
+			}
+		});
+
+		list.addEventListener("drop", (event) => {
+			const projId = event.dataTransfer.getData("text/plain");
+			if (this.projects.find((p) => p.id === projId)) {
+				return;
+			}
+			document.getElementById(projId).querySelector("button:last-of-type").click();
+			list.parentElement.classList.remove("droppable");
+			// event.preventDefault(); // Not required in this case
+		});
 	}
 
 	setSwitchHandlerFunction(switchHandlerFunction) {
