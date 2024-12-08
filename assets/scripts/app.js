@@ -1,3 +1,5 @@
+import { ProjectList } from "./app/ProjectList.js";
+
 class App {
 	static init() {
 		const activeProjectList = new ProjectList("active");
