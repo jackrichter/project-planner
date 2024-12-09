@@ -1,4 +1,4 @@
-export class Component {
+export default class Component {
 	hostElement;
 	insertBefore;
 
@@ -28,3 +28,5 @@ export class Component {
 		);
 	}
 }
+
+export function doSomething() {}

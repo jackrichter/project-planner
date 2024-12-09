@@ -1,6 +1,6 @@
-import { Component } from "./Component.js";
+import Cmd, { doSomething } from "./Component.js";
 
-export class Tooltip extends Component {
+export class Tooltip extends Cmd {
 	element;
 
 	constructor(closeNotifierFn, text, hostElementId) {
