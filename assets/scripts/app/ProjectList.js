@@ -1,5 +1,5 @@
 import { ProjectItem } from "./ProjectItem.js";
-import { DOMHelper } from "../utility/DOMHelper.js";
+import { moveElement } from "../utility/DOMHelper.js";
 
 export class ProjectList {
 	projects = [];
@@ -53,7 +53,7 @@ export class ProjectList {
 	// Add to the other project's list
 	addProject(project) {
 		this.projects.push(project);
-		DOMHelper.moveElement(project.id, `#${this.type}-projects ul`);
+		moveElement(project.id, `#${this.type}-projects ul`);
 		project.update(this.switchProject.bind(this), this.type);
 	}
 
