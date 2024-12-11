@@ -11,6 +11,8 @@ export class ProjectList {
 			this.projects.push(new ProjectItem(item.id, this.switchProject.bind(this), this.type));
 		}
 		this.connectDroppable();
+
+		console.log(globalThis.DEFAULT_VALUE);
 	}
 
 	connectDroppable() {

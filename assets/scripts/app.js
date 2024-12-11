@@ -1,5 +1,8 @@
 import { ProjectList } from "./app/ProjectList.js";
 
+// The GlobalThis object = window object in modules
+globalThis.DEFAULT_VALUE = "MAX";
+
 class App {
 	static init() {
 		const activeProjectList = new ProjectList("active");
