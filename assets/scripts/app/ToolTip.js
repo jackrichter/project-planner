@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import Cmd, { doSomething } from "./Component.js";
 
 export class Tooltip extends Cmd {

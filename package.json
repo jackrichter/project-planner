@@ -17,6 +17,8 @@
 	},
 	"homepage": "https://github.com/jackrichter/project-planner#readme",
 	"devDependencies": {
-		"eslint": "^9.16.0"
+		"@eslint/js": "^9.16.0",
+		"eslint": "^9.16.0",
+		"globals": "^15.13.0"
 	}
 }
